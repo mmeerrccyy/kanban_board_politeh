@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: django.Dockerfile
+    image: knboard_production_django
+    restart: unless-stopped
+    volumes:
+      - "django-static:/app/django-static"
+      - "media:/app/media"
+      - "./backend/settings:/app/settings"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - "/var/lib/postgresql/knboard:/var/lib/postgresql/data"
+    env_file:
+      - .env
+
+volumes:
+  media:
+  django-static:

@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=knboard
+      - POSTGRES_USER=knboard
+      - POSTGRES_PASSWORD=knboard
+    ports:
+      - "5432:5432"
